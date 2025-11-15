@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NessusClientData_v2>
+  <Report name="Example Scan">
+    <ReportHost name="192.168.56.10">
+      <HostProperties>
+        <tag name="host-ip">192.168.56.10</tag>
+        <tag name="host-fqdn">web1.lab.local</tag>
+        <tag name="operating-system">Ubuntu 20.04 LTS</tag>
+      </HostProperties>
+      <ReportItem port="22" svc_name="ssh" protocol="tcp" pluginID="100001" pluginName="OpenSSH Default Credentials">
+        <risk_factor>High</risk_factor>
+        <cvss_base_score>8.1</cvss_base_score>
+        <cvss_vector>AV:N/AC:L/Au:N/C:P/I:P/A:P</cvss_vector>
+        <description>OpenSSH is configured with default credentials that can be abused remotely.</description>
+        <solution>Change default credentials and enforce key-based authentication.</solution>
+        <plugin_output>banner: OpenSSH_7.4p1 Debian-10+deb9u7</plugin_output>
+        <cve>CVE-2018-15473</cve>
+        <see_also>https://www.openssh.com/security.html</see_also>
+      </ReportItem>
+      <ReportItem port="80" svc_name="www" protocol="tcp" pluginID="100002" pluginName="Apache Path Traversal">
+        <risk_factor>Critical</risk_factor>
+        <cvss_base_score>9.8</cvss_base_score>
+        <cvss_vector>AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss_vector>
+        <description>An unauthenticated path traversal exists in Apache HTTPD.</description>
+        <solution>Update Apache HTTPD to the latest patched version.</solution>
+        <plugin_output>Detected Apache/2.4.29 (Ubuntu)</plugin_output>
+        <cve>CVE-2021-41773</cve>
+        <see_also>https://httpd.apache.org/security/vulnerabilities_24.html</see_also>
+      </ReportItem>
+      <ReportItem port="0" svc_name="local" protocol="tcp" pluginID="100003" pluginName="Kernel Local Privilege Escalation">
+        <risk_factor>High</risk_factor>
+        <cvss_base_score>7.8</cvss_base_score>
+        <cvss_vector>AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H</cvss_vector>
+        <description>Requires local shell access to elevate privileges.</description>
+        <solution>Apply the latest kernel patches.</solution>
+        <plugin_output>Local exploit only</plugin_output>
+        <see_also>https://security.ubuntu.com/</see_also>
+      </ReportItem>
+    </ReportHost>
+    <ReportHost name="192.168.56.20">
+      <HostProperties>
+        <tag name="host-ip">192.168.56.20</tag>
+        <tag name="host-fqdn">db1.lab.local</tag>
+        <tag name="operating-system">CentOS 7</tag>
+      </HostProperties>
+      <ReportItem port="3306" svc_name="mysql" protocol="tcp" pluginID="200001" pluginName="MySQL Weak Credentials">
+        <risk_factor>High</risk_factor>
+        <cvss_base_score>8.8</cvss_base_score>
+        <cvss_vector>AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</cvss_vector>
+        <description>The MySQL service allows authentication with weak credentials.</description>
+        <solution>Disable anonymous accounts and rotate privileged passwords.</solution>
+        <plugin_output>MySQL 5.7.32 responds to 'root' with blank password.</plugin_output>
+        <cve>CVE-2012-2122</cve>
+        <see_also>https://dev.mysql.com/doc/</see_also>
+      </ReportItem>
+      <ReportItem port="445" svc_name="smb" protocol="tcp" pluginID="200002" pluginName="SMBv1 Enabled">
+        <risk_factor>Medium</risk_factor>
+        <cvss_base_score>6.5</cvss_base_score>
+        <cvss_vector>AV:N/AC:L/PR:N/UI:N/S:U/C:P/I:P/A:P</cvss_vector>
+        <description>Server Message Block v1 is enabled and exploitable remotely.</description>
+        <solution>Disable SMBv1 and apply MS17-010 patches.</solution>
+        <plugin_output>SMBv1 negotiation succeeded</plugin_output>
+        <cve>CVE-2017-0143</cve>
+        <see_also>https://msrc.microsoft.com/update-guide/vulnerability/CVE-2017-0143</see_also>
+      </ReportItem>
+      <ReportItem port="3389" svc_name="msrdp" protocol="tcp" pluginID="200003" pluginName="RDP Requires Network Level Authentication">
+        <risk_factor>Low</risk_factor>
+        <cvss_base_score>3.1</cvss_base_score>
+        <cvss_vector>AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L</cvss_vector>
+        <description>Remote Desktop is configured with NLA, reducing remote exploitation risk.</description>
+        <solution>Maintain current hardening posture.</solution>
+        <plugin_output>Informational only</plugin_output>
+      </ReportItem>
+    </ReportHost>
+  </Report>
+</NessusClientData_v2>

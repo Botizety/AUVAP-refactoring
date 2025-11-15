@@ -1,0 +1,29 @@
+# AUVAP Report
+
+## Executive Summary
+- Scan timestamp: {{ summary.scan_timestamp }}
+- Total findings: {{ summary.total_findings }}
+- Remote exploitable: {{ summary.remote_exploitable }}
+- Scripts generated: {{ summary.scripts_generated }}
+- Scripts executed: {{ summary.scripts_executed }}
+- Successful exploits: {{ summary.successful_exploits }}
+- Failed exploits: {{ summary.failed_exploits }}
+
+## Severity Breakdown
+{% for severity, count in statistics.severity_breakdown.items() %}
+- **{{ severity }}:** {{ count }}
+{% endfor %}
+
+## Execution Details
+{% for result in details.execution_results %}
+### {{ result.vuln_id }}
+- Status: {{ 'Success' if result.success else 'Failure' }}
+- Evidence: {{ result.evidence or 'n/a' }}
+- Error: {{ result.error_message or 'n/a' }}
+- Runtime: {{ result.execution_time }}s
+{% endfor %}
+
+## RAG Memory Stats
+{% for key, value in statistics.rag_memory.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}

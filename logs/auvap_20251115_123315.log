@@ -1,0 +1,1219 @@
+[2025-11-15 19:33:15,464] [DEBUG] [auvap] - Logging initialized -> logs/auvap_20251115_123315.log
+[2025-11-15 19:33:15,464] [INFO] [auvap] - Starting AUVAP pipeline | RL mode: train
+[2025-11-15 19:33:15,464] [WARNING] [auvap.rag.memory] - Vector RAG backend unavailable, falling back to JSON store: chromadb is required unless a custom client is provided to RAGMemorySystem
+[2025-11-15 19:33:15,464] [WARNING] [auvap.rag.memory] - Using SimpleJSONMemorySystem fallback (vector embeddings unavailable).
+[2025-11-15 19:33:15,480] [INFO] [auvap] - Parsed 115 findings from Nessus file
+[2025-11-15 19:33:15,481] [INFO] [auvap] - Loaded context rules for AUVAP Labs
+[2025-11-15 19:33:15,481] [DEBUG] [auvap.llm.classifier] - Classification prompt token estimate=9925
+[2025-11-15 19:33:15,481] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:33:26,066] [DEBUG] [auvap.llm.gemini] - Attempting JSON repair on malformed Gemini response
+[2025-11-15 19:33:26,071] [WARNING] [auvap.llm.classifier] - remote_exploitable_count mismatch: declared=19 actual=6. Auto-correcting.
+[2025-11-15 19:33:26,071] [WARNING] [auvap.llm.classifier] - Count mismatch: filtered=0 remote=6 total=115. Auto-correcting filtered.
+[2025-11-15 19:33:26,072] [INFO] [auvap] - LLM classified 6 remote exploitable findings
+[2025-11-15 19:33:26,074] [INFO] [auvap] - Classification report written to /Users/boat/AUVAP real/auvap/reports/Meta_hvp1r9_run_classification.json
+[2025-11-15 19:33:26,074] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-001 | RAG summary: success=0, failure=5, lessons=5
+[2025-11-15 19:33:26,074] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:33:33,338] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-002 | RAG summary: success=0, failure=5, lessons=5
+[2025-11-15 19:33:33,339] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:33:42,835] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-003 | RAG summary: success=0, failure=5, lessons=5
+[2025-11-15 19:33:42,835] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:33:50,448] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-004 | RAG summary: success=0, failure=5, lessons=5
+[2025-11-15 19:33:50,450] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:33:56,932] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-005 | RAG summary: success=0, failure=5, lessons=5
+[2025-11-15 19:33:56,933] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:34:05,074] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-006 | RAG summary: success=0, failure=5, lessons=5
+[2025-11-15 19:34:05,074] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:34:11,893] [DEBUG] [auvap.llm.gemini] - Attempting JSON repair on malformed Gemini response
+[2025-11-15 19:34:11,900] [INFO] [auvap] - Generated scripts for 6 vulnerabilities
+[2025-11-15 19:34:11,903] [INFO] [auvap] - Script generation report written to /Users/boat/AUVAP real/auvap/reports/Meta_hvp1r9_run_scripts.json
+[2025-11-15 19:34:11,903] [INFO] [auvap] - Initializing PPO agent for RL mode: train
+[2025-11-15 19:34:12,261] [INFO] [auvap] - Remote VM executor enabled - scripts will run on VM
+[2025-11-15 19:34:22,355] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:34:22,377] [INFO] [auvap] - Training PPO agent on 6 vulnerabilities
+[2025-11-15 19:34:22,380] [INFO] [auvap.rl.rl_feedback] - RAG context | successes=0 failures=5 lessons=5
+[2025-11-15 19:34:22,417] [INFO] [auvap.rl.ppo_agent] - Created PPO model 'ppo_VULN-001' | lr=0.0003 n_steps=2048 batch=64 device=auto
+[2025-11-15 19:34:22,417] [INFO] [auvap.rl.ppo_agent] - Starting PPO training for 500 timesteps
+[2025-11-15 19:34:22,970] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:34:33,343] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:34:33,442] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5e85ff15_result.json
+[2025-11-15 19:34:33,457] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:34:33,526] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:34:43,730] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:34:43,898] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0516812a_result.json
+[2025-11-15 19:34:43,911] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:34:44,249] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:34:54,679] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:34:54,714] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_29992715_result.json
+[2025-11-15 19:34:54,728] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:34:54,802] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:35:04,903] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:35:04,936] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0a34ace6_result.json
+[2025-11-15 19:35:04,949] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:35:05,020] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:35:15,215] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:35:15,255] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_144e0ca8_result.json
+[2025-11-15 19:35:15,375] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:35:15,506] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:35:25,885] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:35:25,919] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e14ddb67_result.json
+[2025-11-15 19:35:25,933] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:35:26,005] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:35:36,150] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:35:36,204] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6e8f5993_result.json
+[2025-11-15 19:35:36,221] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:35:36,456] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:35:46,924] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:35:46,965] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_995da477_result.json
+[2025-11-15 19:35:46,985] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:35:47,068] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:35:57,223] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:35:57,335] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_92ec0b8d_result.json
+[2025-11-15 19:35:57,348] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:35:57,601] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:36:07,746] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:36:07,792] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2b1ab30a_result.json
+[2025-11-15 19:36:07,809] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:36:07,889] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:36:17,988] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:36:18,039] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b89671c9_result.json
+[2025-11-15 19:36:18,056] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:36:18,130] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:36:28,241] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:36:28,407] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ead15f67_result.json
+[2025-11-15 19:36:28,421] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:36:28,763] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:36:39,203] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:36:39,250] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_03c4671b_result.json
+[2025-11-15 19:36:39,265] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:36:39,344] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:36:49,484] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:36:49,572] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a27ed508_result.json
+[2025-11-15 19:36:49,585] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:36:49,925] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:37:00,293] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:37:00,329] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_89bc16d8_result.json
+[2025-11-15 19:37:00,343] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:37:00,416] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:37:10,519] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:37:10,554] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5586a699_result.json
+[2025-11-15 19:37:10,567] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:37:10,635] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:37:20,801] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:37:20,969] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_84f2ef55_result.json
+[2025-11-15 19:37:20,983] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:37:21,284] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:37:31,529] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:37:31,562] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4d1b3d92_result.json
+[2025-11-15 19:37:31,575] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:37:31,644] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:37:41,764] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:37:41,882] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c9f7959f_result.json
+[2025-11-15 19:37:41,895] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:37:42,010] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:37:52,124] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:37:52,160] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ea0478a9_result.json
+[2025-11-15 19:37:52,175] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:37:52,249] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:38:02,371] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:38:02,404] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_bc0edab9_result.json
+[2025-11-15 19:38:02,552] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:38:02,852] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:38:13,363] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:38:13,400] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_435f5363_result.json
+[2025-11-15 19:38:13,415] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:38:13,491] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:38:23,577] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:38:23,613] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f18fd816_result.json
+[2025-11-15 19:38:23,626] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:38:23,692] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:38:33,811] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:38:33,847] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_621ec3fc_result.json
+[2025-11-15 19:38:33,993] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:38:34,198] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:38:44,717] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:38:44,760] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_13ef106e_result.json
+[2025-11-15 19:38:44,771] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:38:44,846] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:38:55,011] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:38:55,046] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4941820a_result.json
+[2025-11-15 19:38:55,117] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:38:55,294] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:39:05,711] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:39:05,745] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d2df0eda_result.json
+[2025-11-15 19:39:05,759] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:39:05,832] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:39:15,918] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:39:15,954] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1ba89a33_result.json
+[2025-11-15 19:39:15,974] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:39:16,051] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:39:26,164] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:39:26,213] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f3561ba2_result.json
+[2025-11-15 19:39:26,227] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:39:26,332] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:39:36,448] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:39:36,482] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_db214fd9_result.json
+[2025-11-15 19:39:36,496] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:39:36,567] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:39:46,686] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:39:46,948] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4911e5ec_result.json
+[2025-11-15 19:39:46,961] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:39:47,311] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:39:57,626] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:39:57,662] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_41548a3f_result.json
+[2025-11-15 19:39:57,675] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:39:57,748] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:40:07,862] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:40:07,898] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_11bd29e5_result.json
+[2025-11-15 19:40:08,047] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:40:08,259] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:40:18,696] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:40:18,731] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_79bf78e7_result.json
+[2025-11-15 19:40:18,746] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:40:18,829] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:40:28,939] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:40:28,973] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6d699b0b_result.json
+[2025-11-15 19:40:28,992] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:40:29,067] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:40:39,206] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:40:39,241] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b2f0ff4e_result.json
+[2025-11-15 19:40:39,368] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:40:39,644] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:40:50,056] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:40:50,093] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_03b7cf84_result.json
+[2025-11-15 19:40:50,106] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:40:50,197] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:41:00,333] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:41:00,573] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4d3a7e16_result.json
+[2025-11-15 19:41:00,646] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:41:00,854] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:41:11,218] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:41:11,252] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f9a2b67e_result.json
+[2025-11-15 19:41:11,271] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:41:11,342] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:41:21,439] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:41:21,476] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_78ed336c_result.json
+[2025-11-15 19:41:21,490] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:41:21,571] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:41:31,740] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:41:31,773] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e8c39fc1_result.json
+[2025-11-15 19:41:31,787] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:41:31,997] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:41:42,109] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:41:42,153] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_13c73c6b_result.json
+[2025-11-15 19:41:42,172] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:41:42,243] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:41:52,386] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:41:52,430] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ece70f5c_result.json
+[2025-11-15 19:41:52,576] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:41:53,019] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:42:03,381] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:42:03,415] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_814c82bf_result.json
+[2025-11-15 19:42:03,429] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:42:03,506] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:42:13,596] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:42:13,687] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_fec2bcc0_result.json
+[2025-11-15 19:42:13,701] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:42:14,042] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:42:24,555] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:42:24,591] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4573f0d6_result.json
+[2025-11-15 19:42:24,606] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:42:24,681] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:42:34,783] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:42:34,818] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ab8c06a0_result.json
+[2025-11-15 19:42:34,832] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:42:34,917] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:42:45,084] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:42:45,120] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7e958678_result.json
+[2025-11-15 19:42:45,267] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:42:45,518] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:42:55,863] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:42:55,897] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4327a11e_result.json
+[2025-11-15 19:42:55,911] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:42:55,981] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:43:06,092] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:43:06,144] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3a8941d2_result.json
+[2025-11-15 19:43:06,164] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:43:06,269] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:43:16,706] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:43:16,747] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_621732b6_result.json
+[2025-11-15 19:43:16,761] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:43:16,833] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:43:26,926] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:43:26,977] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_417a0a04_result.json
+[2025-11-15 19:43:27,005] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:43:27,130] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:43:37,476] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:43:37,550] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_862eb3e1_result.json
+[2025-11-15 19:43:37,566] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:43:37,668] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:43:47,866] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:43:47,906] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ad7e21ed_result.json
+[2025-11-15 19:43:47,929] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:43:48,081] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:43:58,588] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:43:58,624] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_357e7ea9_result.json
+[2025-11-15 19:43:58,638] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:43:58,711] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:44:08,842] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:44:08,956] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_37436221_result.json
+[2025-11-15 19:44:08,970] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:44:09,283] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:44:19,536] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:44:19,574] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_566524a6_result.json
+[2025-11-15 19:44:19,594] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:44:19,671] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:44:29,832] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:44:29,883] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e801e4f2_result.json
+[2025-11-15 19:44:29,898] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:44:29,977] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:44:40,067] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:44:40,102] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a98840d7_result.json
+[2025-11-15 19:44:40,116] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:44:40,202] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:44:50,302] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:44:50,348] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d8bc446d_result.json
+[2025-11-15 19:44:50,365] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:44:50,447] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:45:00,653] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:45:00,689] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5fda748f_result.json
+[2025-11-15 19:45:00,836] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:45:01,043] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:45:11,633] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:45:11,675] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_90c635c0_result.json
+[2025-11-15 19:45:11,689] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:45:11,762] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:45:21,861] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:45:22,031] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_92d6274b_result.json
+[2025-11-15 19:45:22,096] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:45:22,463] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:45:32,808] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:45:32,846] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4dc56743_result.json
+[2025-11-15 19:45:32,863] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:45:32,939] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:45:43,031] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:45:43,064] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_35d74e60_result.json
+[2025-11-15 19:45:43,078] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:45:43,143] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:45:53,254] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:45:53,509] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_81caa5af_result.json
+[2025-11-15 19:45:53,523] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:45:53,835] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:46:03,979] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:46:04,017] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b62f0d5c_result.json
+[2025-11-15 19:46:04,031] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:46:04,099] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:46:14,287] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:46:14,324] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b10bdf4e_result.json
+[2025-11-15 19:46:14,361] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:46:14,469] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:46:24,603] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:46:24,641] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c8ea12ff_result.json
+[2025-11-15 19:46:24,656] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:46:24,733] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:46:34,881] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:46:34,919] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6e57e001_result.json
+[2025-11-15 19:46:35,063] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:46:35,503] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:46:45,872] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:46:45,911] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5e58abd6_result.json
+[2025-11-15 19:46:45,926] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:46:45,996] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:46:56,097] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:46:56,133] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_fde1c6c4_result.json
+[2025-11-15 19:46:56,149] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:46:56,225] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:47:06,371] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:47:06,411] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1ba1c281_result.json
+[2025-11-15 19:47:06,560] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:47:06,828] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:47:17,183] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:47:17,217] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_eab11107_result.json
+[2025-11-15 19:47:17,232] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:47:17,306] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:47:27,512] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:47:27,695] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7bae2bed_result.json
+[2025-11-15 19:47:27,709] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:47:27,981] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:47:38,384] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:47:38,419] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2e86cf7a_result.json
+[2025-11-15 19:47:38,439] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:47:38,515] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:47:48,611] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:47:48,654] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0761a961_result.json
+[2025-11-15 19:47:48,674] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:47:48,762] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:47:58,874] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:47:58,907] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_efd8e4a1_result.json
+[2025-11-15 19:47:58,927] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:47:59,004] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:48:09,138] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:48:09,177] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_472c2847_result.json
+[2025-11-15 19:48:09,188] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:48:09,261] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:48:19,360] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:48:19,395] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_91dd99bc_result.json
+[2025-11-15 19:48:19,540] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:48:19,982] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:48:30,350] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:48:30,395] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0589caf4_result.json
+[2025-11-15 19:48:30,409] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:48:30,484] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:48:40,578] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:48:40,747] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f9794bb6_result.json
+[2025-11-15 19:48:40,891] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:48:41,091] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:48:51,682] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:48:51,722] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_206c9a1f_result.json
+[2025-11-15 19:48:51,736] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:48:51,808] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:49:01,996] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:49:02,034] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d7afb6d2_result.json
+[2025-11-15 19:49:02,049] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:49:02,126] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:49:12,290] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:49:12,325] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f8bf615f_result.json
+[2025-11-15 19:49:12,393] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:49:12,573] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:49:22,980] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:49:23,019] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e255884f_result.json
+[2025-11-15 19:49:23,033] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:49:23,105] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:49:33,207] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:49:33,574] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d2a82d58_result.json
+[2025-11-15 19:49:33,592] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:49:33,867] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:49:44,142] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:49:44,283] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_acd8738a_result.json
+[2025-11-15 19:49:44,296] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:49:44,366] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:49:54,459] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:49:54,581] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_03dd6498_result.json
+[2025-11-15 19:49:54,595] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:49:54,662] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:50:04,772] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:50:04,806] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1677b781_result.json
+[2025-11-15 19:50:04,820] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:50:04,999] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:50:15,454] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:50:15,491] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_25894151_result.json
+[2025-11-15 19:50:15,506] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:50:15,639] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:50:25,796] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:50:25,967] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ebea1ea1_result.json
+[2025-11-15 19:50:26,112] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:50:26,389] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:50:36,711] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:50:36,901] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_183c5f9a_result.json
+[2025-11-15 19:50:36,917] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:50:36,992] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:50:47,097] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:50:47,134] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ecbc2e6b_result.json
+[2025-11-15 19:50:47,287] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:50:47,722] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:50:58,084] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:50:58,118] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_eec971f9_result.json
+[2025-11-15 19:50:58,132] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:50:58,200] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:51:08,299] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:51:08,440] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1540e823_result.json
+[2025-11-15 19:51:08,454] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:51:08,526] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:51:18,733] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:51:18,772] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1c87b00d_result.json
+[2025-11-15 19:51:18,917] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:51:19,126] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:51:29,640] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:51:29,672] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5a09b95d_result.json
+[2025-11-15 19:51:29,687] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:51:29,757] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:51:39,955] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:51:39,990] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_263d8d52_result.json
+[2025-11-15 19:51:40,050] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:51:40,168] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:51:50,557] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:51:50,594] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_04357a49_result.json
+[2025-11-15 19:51:50,607] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:51:50,685] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:52:00,784] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:52:00,824] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_67ce595d_result.json
+[2025-11-15 19:52:00,839] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:52:01,018] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:52:11,130] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:52:11,182] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4f0d647b_result.json
+[2025-11-15 19:52:11,198] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:52:11,283] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:52:21,398] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:52:21,436] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_efac230c_result.json
+[2025-11-15 19:52:21,450] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:52:21,524] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:52:31,707] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:52:31,973] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6cfdbcb4_result.json
+[2025-11-15 19:52:31,989] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:52:32,345] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:52:42,745] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:52:42,783] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d66d9ce6_result.json
+[2025-11-15 19:52:42,798] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:52:42,875] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:52:52,983] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:52:53,158] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_95750848_result.json
+[2025-11-15 19:52:53,174] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:52:53,757] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:53:04,126] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:53:04,160] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3fe27483_result.json
+[2025-11-15 19:53:04,173] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:53:04,246] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:53:14,330] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:53:14,364] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_cf64da5e_result.json
+[2025-11-15 19:53:14,379] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:53:14,462] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:53:24,622] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:53:25,086] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_91f559de_result.json
+[2025-11-15 19:53:25,100] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:53:25,439] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:53:35,793] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:53:35,833] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2ac48f80_result.json
+[2025-11-15 19:53:35,849] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:53:35,922] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:53:46,097] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:53:46,131] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b6d90bf1_result.json
+[2025-11-15 19:53:46,198] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:53:46,365] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:53:56,781] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:53:56,817] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_dc54b6bd_result.json
+[2025-11-15 19:53:56,830] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:53:56,898] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:54:06,990] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:54:07,024] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_dece4c9f_result.json
+[2025-11-15 19:54:07,038] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:54:07,104] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:54:17,218] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:54:17,261] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_de6fb752_result.json
+[2025-11-15 19:54:17,275] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:54:17,396] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:54:27,507] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:54:27,544] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1ae6dcdf_result.json
+[2025-11-15 19:54:27,559] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:54:27,633] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:54:37,762] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:54:38,026] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_df55d951_result.json
+[2025-11-15 19:54:38,040] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:54:38,385] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:54:48,800] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:54:48,836] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a888ff1d_result.json
+[2025-11-15 19:54:48,854] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:54:48,944] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:54:59,115] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:54:59,151] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_95a00480_result.json
+[2025-11-15 19:54:59,296] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:54:59,596] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:55:10,105] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:55:10,140] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0a8b13d0_result.json
+[2025-11-15 19:55:10,160] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:55:10,234] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:55:20,346] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:55:20,381] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4f76fb8c_result.json
+[2025-11-15 19:55:20,394] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:55:20,468] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:55:30,595] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:55:30,628] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_86a46685_result.json
+[2025-11-15 19:55:30,773] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:55:31,124] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:55:41,480] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:55:41,524] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e7888f03_result.json
+[2025-11-15 19:55:41,541] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:55:41,616] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:55:51,789] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:55:51,822] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6227a0cf_result.json
+[2025-11-15 19:55:51,952] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:55:52,073] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:56:02,563] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:56:02,600] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3a98b796_result.json
+[2025-11-15 19:56:02,615] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:56:02,701] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:56:12,798] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:56:12,832] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_78c00c79_result.json
+[2025-11-15 19:56:12,845] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:56:12,922] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:56:23,020] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:56:23,054] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_9d472516_result.json
+[2025-11-15 19:56:23,069] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:56:23,168] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:56:33,288] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:56:33,322] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_bdd08fbd_result.json
+[2025-11-15 19:56:33,336] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:56:33,418] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:56:43,538] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:56:43,574] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4560b9be_result.json
+[2025-11-15 19:56:43,725] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:56:44,163] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:56:54,522] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:56:54,559] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5695e656_result.json
+[2025-11-15 19:56:54,574] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:56:54,651] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:57:04,788] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:57:04,822] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6fc74c44_result.json
+[2025-11-15 19:57:04,970] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:57:05,321] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:57:15,777] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:57:15,812] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_857ca08c_result.json
+[2025-11-15 19:57:15,825] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:57:15,913] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:57:26,019] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:57:26,052] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_10eeb639_result.json
+[2025-11-15 19:57:26,065] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:57:26,142] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:57:36,296] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:57:36,331] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_375d4e46_result.json
+[2025-11-15 19:57:36,396] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:57:36,578] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:57:47,084] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:57:47,126] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_eda5294f_result.json
+[2025-11-15 19:57:47,140] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:57:47,215] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:57:57,358] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:57:57,524] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6f2544f3_result.json
+[2025-11-15 19:57:57,540] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:57:58,013] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:58:08,252] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:58:08,308] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f34a2b64_result.json
+[2025-11-15 19:58:08,325] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:58:08,405] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:58:18,544] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:58:18,663] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4a511262_result.json
+[2025-11-15 19:58:18,676] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:58:18,743] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:58:28,858] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:58:28,891] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_425d215d_result.json
+[2025-11-15 19:58:28,907] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:58:28,977] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:58:39,064] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:58:39,100] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_826a888d_result.json
+[2025-11-15 19:58:39,116] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:58:39,186] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:58:49,415] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:58:49,453] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_412f4030_result.json
+[2025-11-15 19:58:49,602] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:58:50,041] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:59:00,403] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:59:00,439] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_fed270d2_result.json
+[2025-11-15 19:59:00,456] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:59:00,642] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:59:10,843] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:59:11,034] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_9f5cdb12_result.json
+[2025-11-15 19:59:11,052] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:59:11,394] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:59:22,008] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:59:22,042] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f4eb6dcd_result.json
+[2025-11-15 19:59:22,056] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:59:22,127] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:59:32,227] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:59:32,263] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4aa55c4a_result.json
+[2025-11-15 19:59:32,277] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:59:32,352] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:59:42,456] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:59:42,552] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f93d0ca0_result.json
+[2025-11-15 19:59:42,567] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:59:42,749] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 19:59:53,241] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:59:53,291] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_aa7da4d3_result.json
+[2025-11-15 19:59:53,309] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 19:59:53,377] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:00:03,577] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:00:03,728] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1ba4721c_result.json
+[2025-11-15 20:00:03,744] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:00:04,067] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:00:14,323] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:00:14,358] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_aceba965_result.json
+[2025-11-15 20:00:14,375] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:00:14,448] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:00:24,534] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:00:24,567] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_680c425b_result.json
+[2025-11-15 20:00:24,583] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:00:24,669] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:00:34,764] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:00:34,801] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b1549136_result.json
+[2025-11-15 20:00:34,814] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:00:34,891] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:00:44,994] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:00:45,028] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_390851cb_result.json
+[2025-11-15 20:00:45,042] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:00:45,110] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:00:55,211] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:00:55,257] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_358807d3_result.json
+[2025-11-15 20:00:55,270] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:00:55,340] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:01:05,444] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:01:05,488] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1ae39220_result.json
+[2025-11-15 20:01:05,502] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:01:05,568] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:01:15,662] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:01:15,702] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_49979214_result.json
+[2025-11-15 20:01:15,717] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:01:15,786] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:01:25,883] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:01:25,917] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3f8105e1_result.json
+[2025-11-15 20:01:25,930] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:01:26,003] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:01:36,103] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:01:36,138] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c19c0dfa_result.json
+[2025-11-15 20:01:36,151] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:01:36,231] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:01:46,503] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:01:46,538] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f6ed7ac7_result.json
+[2025-11-15 20:01:46,553] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:01:46,752] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:01:56,860] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:01:56,902] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c32320be_result.json
+[2025-11-15 20:01:56,916] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:01:56,991] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:02:07,079] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:02:07,120] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_647e383c_result.json
+[2025-11-15 20:02:07,137] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:02:07,219] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:02:17,329] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:02:17,367] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2ba65c9b_result.json
+[2025-11-15 20:02:17,389] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:02:17,475] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:02:27,875] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:02:27,918] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1d161e51_result.json
+[2025-11-15 20:02:27,934] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:02:28,041] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:02:38,152] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:02:38,192] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f24c4f74_result.json
+[2025-11-15 20:02:38,207] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:02:38,380] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:02:48,495] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:02:48,538] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_31512aaa_result.json
+[2025-11-15 20:02:48,555] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:02:48,643] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:02:58,859] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:02:58,905] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5d51612f_result.json
+[2025-11-15 20:02:58,921] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:02:59,014] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:03:09,126] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:03:09,247] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c08012cc_result.json
+[2025-11-15 20:03:09,263] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:03:09,344] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:03:19,482] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:03:19,529] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_daca8f63_result.json
+[2025-11-15 20:03:19,541] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:03:19,618] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:03:29,798] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:03:29,835] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_cffc0737_result.json
+[2025-11-15 20:03:29,847] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:03:29,915] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:03:39,993] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:03:40,029] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_8fcddddb_result.json
+[2025-11-15 20:03:40,044] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:03:40,117] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:03:50,224] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:03:50,266] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b45e3748_result.json
+[2025-11-15 20:03:50,280] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:03:50,348] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:04:00,456] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:04:00,491] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_8111de9d_result.json
+[2025-11-15 20:04:00,504] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:04:00,639] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:04:10,743] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:04:10,787] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6064f869_result.json
+[2025-11-15 20:04:10,801] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:04:10,876] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:04:20,969] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:04:21,003] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f605f578_result.json
+[2025-11-15 20:04:21,018] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:04:21,086] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:04:31,180] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:04:31,214] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0d2c5e7b_result.json
+[2025-11-15 20:04:31,229] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:04:31,302] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:04:41,411] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:04:41,446] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5ca1a9cc_result.json
+[2025-11-15 20:04:41,460] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:04:41,651] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:04:51,752] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:04:51,786] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_8857be36_result.json
+[2025-11-15 20:04:51,799] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:04:51,873] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:05:01,978] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:05:02,016] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_bf065004_result.json
+[2025-11-15 20:05:02,029] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:05:02,103] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:05:12,201] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:05:12,239] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e56cdae1_result.json
+[2025-11-15 20:05:12,252] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:05:12,327] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:05:22,450] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:05:22,488] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_58ec4f99_result.json
+[2025-11-15 20:05:22,501] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:05:22,577] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:05:32,682] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:05:32,717] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ea604158_result.json
+[2025-11-15 20:05:32,730] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:05:32,802] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:05:42,909] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:05:42,945] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_051c3429_result.json
+[2025-11-15 20:05:42,957] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:05:43,031] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:05:53,128] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:05:53,163] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_95df7379_result.json
+[2025-11-15 20:05:53,176] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:05:53,247] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:06:03,357] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:06:03,394] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c12f75b4_result.json
+[2025-11-15 20:06:03,408] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:06:03,482] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:06:13,575] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:06:13,610] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_47ed24fc_result.json
+[2025-11-15 20:06:13,624] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:06:13,696] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:06:23,803] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:06:23,944] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_576df779_result.json
+[2025-11-15 20:06:23,958] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:06:24,033] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:06:34,129] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:06:34,163] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_83718df5_result.json
+[2025-11-15 20:06:34,176] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:06:34,246] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:06:44,336] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:06:44,370] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4067a65d_result.json
+[2025-11-15 20:06:44,384] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:06:44,456] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:06:54,569] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:06:54,605] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2dc5d276_result.json
+[2025-11-15 20:06:54,620] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:06:54,690] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:07:04,769] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:07:04,807] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e8545238_result.json
+[2025-11-15 20:07:04,820] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:07:04,890] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:07:14,996] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:07:15,034] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0333ff8d_result.json
+[2025-11-15 20:07:15,048] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:07:15,120] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:07:25,345] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:07:25,379] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_48a6a553_result.json
+[2025-11-15 20:07:25,392] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:07:25,460] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:07:35,574] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:07:35,615] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_82d1ef19_result.json
+[2025-11-15 20:07:35,629] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:07:35,708] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:07:45,821] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:07:45,858] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e7eb9007_result.json
+[2025-11-15 20:07:45,871] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:07:45,958] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:07:56,064] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:07:56,098] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a8554f8e_result.json
+[2025-11-15 20:07:56,114] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:07:56,200] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:08:06,303] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:08:06,358] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d664197e_result.json
+[2025-11-15 20:08:06,371] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:08:06,444] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:08:16,551] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:08:16,590] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_fae9a485_result.json
+[2025-11-15 20:08:16,606] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:08:16,681] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:08:26,785] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:08:26,836] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1bdeff74_result.json
+[2025-11-15 20:08:26,850] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:08:26,918] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:08:37,023] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:08:37,058] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6b6557a1_result.json
+[2025-11-15 20:08:37,079] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:08:37,150] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:08:47,257] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:08:47,290] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_fec0c2cb_result.json
+[2025-11-15 20:08:47,301] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:08:47,383] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:08:57,502] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:08:57,554] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_21acc2dd_result.json
+[2025-11-15 20:08:57,569] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:08:57,635] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:09:07,756] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:09:07,797] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_94ade8bc_result.json
+[2025-11-15 20:09:07,813] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:09:07,883] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:09:17,975] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:09:18,020] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2a330975_result.json
+[2025-11-15 20:09:18,033] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:09:18,100] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:09:28,196] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:09:28,234] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e128fb52_result.json
+[2025-11-15 20:09:28,247] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:09:28,316] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:09:38,413] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:09:38,442] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_dcb7dfc7_result.json
+[2025-11-15 20:09:38,453] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:09:38,515] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:09:48,617] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:09:48,650] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_dfa639ed_result.json
+[2025-11-15 20:09:48,664] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:09:48,727] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:09:58,837] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:09:58,876] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5f4c97f5_result.json
+[2025-11-15 20:09:58,890] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:09:58,965] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:10:09,071] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:10:09,103] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_04e745cf_result.json
+[2025-11-15 20:10:09,114] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:10:09,275] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:10:19,383] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:10:19,416] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_142235b9_result.json
+[2025-11-15 20:10:19,429] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:10:19,501] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:10:29,603] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:10:29,632] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_299fd372_result.json
+[2025-11-15 20:10:29,644] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:10:29,709] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:10:39,804] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:10:39,837] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a181abf8_result.json
+[2025-11-15 20:10:39,850] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:10:39,910] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:10:49,994] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:10:50,038] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d7905178_result.json
+[2025-11-15 20:10:50,054] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:10:50,127] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:11:00,235] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:11:00,272] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_db02c01c_result.json
+[2025-11-15 20:11:00,284] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:11:00,348] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:11:10,442] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:11:10,479] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_81c06c61_result.json
+[2025-11-15 20:11:10,490] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:11:10,561] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:11:20,764] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:11:20,798] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ace35332_result.json
+[2025-11-15 20:11:20,814] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:11:20,880] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:11:30,981] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:11:31,020] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b2c054a4_result.json
+[2025-11-15 20:11:31,032] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:11:31,107] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:11:41,204] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:11:41,241] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1b869997_result.json
+[2025-11-15 20:11:41,254] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:11:41,330] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:11:51,423] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:11:51,469] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_aa7ebc17_result.json
+[2025-11-15 20:11:51,482] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:11:51,588] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:12:01,698] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:12:01,734] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a3fc2eeb_result.json
+[2025-11-15 20:12:01,746] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:12:01,820] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:12:11,925] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:12:11,959] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2844dfbf_result.json
+[2025-11-15 20:12:11,976] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:12:12,050] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:12:22,158] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:12:22,202] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_aa705b85_result.json
+[2025-11-15 20:12:22,215] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:12:22,293] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:12:32,400] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:12:32,434] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d6016a65_result.json
+[2025-11-15 20:12:32,448] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:12:32,523] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:12:42,613] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:12:42,662] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_fddf91de_result.json
+[2025-11-15 20:12:42,675] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:12:42,947] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:12:53,054] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:12:53,086] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_94374faa_result.json
+[2025-11-15 20:12:53,100] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:12:53,166] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:13:03,275] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:13:03,326] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7e4cd868_result.json
+[2025-11-15 20:13:03,340] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:13:03,421] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:13:13,536] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:13:13,588] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_32640172_result.json
+[2025-11-15 20:13:13,606] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:13:13,679] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:13:23,792] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:13:23,851] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_049073ea_result.json
+[2025-11-15 20:13:23,864] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:13:23,940] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:13:34,142] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:13:34,175] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ed2cab7b_result.json
+[2025-11-15 20:13:34,189] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:13:34,257] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:28:37,779] [ERROR] [auvap.rl.remote_executor] - Failed to connect to VM: Authentication timeout.
+[2025-11-15 20:28:37,784] [WARNING] [auvap.rl.remote_executor] - Failed to read result from VM: VM connection failed: Authentication timeout.
+[2025-11-15 20:28:53,877] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:28:53,908] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:28:53,991] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:29:04,087] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:29:04,127] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b2304843_result.json
+[2025-11-15 20:29:04,145] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:29:04,331] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:29:14,450] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:29:14,495] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5dd8f445_result.json
+[2025-11-15 20:29:14,510] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:29:14,586] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:44:27,446] [ERROR] [auvap.rl.remote_executor] - Failed to connect to VM: Authentication timeout.
+[2025-11-15 20:44:27,446] [WARNING] [auvap.rl.remote_executor] - Failed to read result from VM: VM connection failed: Authentication timeout.
+[2025-11-15 20:44:35,237] [ERROR] [auvap.rl.remote_executor] - Failed to connect to VM: [Errno 60] Operation timed out
+[2025-11-15 20:44:35,240] [ERROR] [auvap.rl.remote_executor] - Command execution failed after reconnect attempt: VM connection failed: [Errno 60] Operation timed out
+[2025-11-15 20:44:35,240] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:44:43,037] [ERROR] [auvap.rl.remote_executor] - Failed to connect to VM: [Errno 60] Operation timed out
+[2025-11-15 20:44:43,037] [WARNING] [auvap.rl.script_env] - Script execution failed: VM connection failed: [Errno 60] Operation timed out
+[2025-11-15 20:44:53,221] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:44:53,315] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:45:03,420] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:45:03,458] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7d0c7858_result.json
+[2025-11-15 20:45:03,472] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:45:03,632] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:45:13,738] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:45:13,776] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_28b92dbb_result.json
+[2025-11-15 20:45:13,792] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:45:13,871] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:52:24,685] [ERROR] [auvap.rl.remote_executor] - Failed to connect to VM: Authentication timeout.
+[2025-11-15 20:52:24,685] [WARNING] [auvap.rl.remote_executor] - Failed to read result from VM: VM connection failed: Authentication timeout.
+[2025-11-15 20:52:39,494] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:52:39,535] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:52:39,710] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:52:49,804] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:52:49,844] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_294bb43c_result.json
+[2025-11-15 20:52:49,861] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:52:50,031] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:53:00,135] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:53:00,187] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_15b3e59d_result.json
+[2025-11-15 20:53:00,201] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:53:00,283] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:53:10,473] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:53:10,509] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_8e893f69_result.json
+[2025-11-15 20:53:10,522] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:53:10,595] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:53:20,695] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:53:20,727] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7d0cf9ee_result.json
+[2025-11-15 20:53:20,740] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:53:20,806] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:53:30,936] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:53:30,970] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_74eb1daf_result.json
+[2025-11-15 20:53:30,983] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:53:31,065] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:53:41,229] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:53:41,267] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4cd654bd_result.json
+[2025-11-15 20:53:41,283] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:53:41,363] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:53:51,471] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:53:51,509] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_18b00720_result.json
+[2025-11-15 20:53:51,527] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:53:51,607] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:54:01,796] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:54:01,835] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_bc92c1ca_result.json
+[2025-11-15 20:54:01,851] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:54:01,931] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:54:12,041] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:54:12,164] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_384bcfb6_result.json
+[2025-11-15 20:54:12,182] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:54:12,264] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:54:22,375] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:54:22,412] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2d9e5d12_result.json
+[2025-11-15 20:54:22,429] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:54:22,503] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:54:32,670] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:54:32,710] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_07c43563_result.json
+[2025-11-15 20:54:32,724] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:54:32,806] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:54:42,963] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:54:43,005] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7407c21d_result.json
+[2025-11-15 20:54:43,020] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:54:43,105] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:54:53,195] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:54:53,230] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_bbf0e73b_result.json
+[2025-11-15 20:54:53,245] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:54:53,328] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:55:03,500] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:55:03,544] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c329108f_result.json
+[2025-11-15 20:55:03,556] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:55:03,630] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:55:13,733] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:55:13,777] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2144d1eb_result.json
+[2025-11-15 20:55:13,791] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:55:13,864] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:55:23,977] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:55:24,015] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1bd4f21b_result.json
+[2025-11-15 20:55:24,029] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:55:24,106] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:55:34,181] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:55:34,225] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_2e19e6bb_result.json
+[2025-11-15 20:55:34,241] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:55:34,319] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:55:44,432] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:55:44,466] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6ab42ba1_result.json
+[2025-11-15 20:55:44,479] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:55:44,548] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:55:54,683] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:55:54,717] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_1a383d03_result.json
+[2025-11-15 20:55:54,731] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:55:54,798] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:56:04,907] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:56:04,948] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d2dcac95_result.json
+[2025-11-15 20:56:04,962] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:56:05,037] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:56:15,133] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:56:15,173] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b66424ca_result.json
+[2025-11-15 20:56:15,188] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:56:15,257] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:56:25,355] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:56:25,394] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ba7e0b9b_result.json
+[2025-11-15 20:56:25,412] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:56:25,488] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:56:35,598] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:56:35,637] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3e57f86b_result.json
+[2025-11-15 20:56:35,653] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:56:35,722] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:56:45,810] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:56:45,851] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4b02cb2c_result.json
+[2025-11-15 20:56:45,864] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:56:45,937] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:56:56,033] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:56:56,076] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_93dbec9a_result.json
+[2025-11-15 20:56:56,089] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:56:56,161] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:57:06,260] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:57:06,298] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ae562111_result.json
+[2025-11-15 20:57:06,312] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:57:06,490] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:57:16,595] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:57:16,636] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_8b118101_result.json
+[2025-11-15 20:57:16,650] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:57:16,727] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:57:26,831] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:57:26,873] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6860fc08_result.json
+[2025-11-15 20:57:26,887] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:57:26,960] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:57:37,074] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:57:37,111] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4a95e26e_result.json
+[2025-11-15 20:57:37,124] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:57:37,200] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:57:47,308] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:57:47,346] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ca58add7_result.json
+[2025-11-15 20:57:47,360] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:57:47,430] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:57:57,532] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:57:57,567] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_24724801_result.json
+[2025-11-15 20:57:57,581] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:57:57,652] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:58:07,740] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:58:07,775] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_4df0c4a7_result.json
+[2025-11-15 20:58:07,794] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:58:07,869] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:58:17,980] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:58:18,013] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_cc4fd447_result.json
+[2025-11-15 20:58:18,025] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:58:18,100] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:58:28,198] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:58:28,233] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3d1af32a_result.json
+[2025-11-15 20:58:28,246] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:58:28,322] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:58:38,422] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:58:38,457] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_365bf390_result.json
+[2025-11-15 20:58:38,470] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:58:38,544] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:58:48,656] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:58:48,690] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_136ad288_result.json
+[2025-11-15 20:58:48,704] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:58:48,780] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:58:58,888] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:58:58,925] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_09aff2c2_result.json
+[2025-11-15 20:58:58,940] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:58:59,013] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:59:09,119] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:59:09,161] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_0992f300_result.json
+[2025-11-15 20:59:09,174] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:59:09,249] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:59:19,348] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:59:19,380] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6dcbe8ee_result.json
+[2025-11-15 20:59:19,394] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:59:19,461] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:59:29,569] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:59:29,602] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_c09699ed_result.json
+[2025-11-15 20:59:29,616] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:59:29,686] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:59:39,788] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:59:39,823] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_428488a6_result.json
+[2025-11-15 20:59:39,836] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:59:39,905] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 20:59:49,999] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 20:59:50,035] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3ec0656c_result.json
+[2025-11-15 20:59:50,048] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 20:59:50,121] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:00:00,218] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:00:00,253] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_7fe99cbe_result.json
+[2025-11-15 21:00:00,267] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:00:00,337] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:00:10,437] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:00:10,472] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_54ec802e_result.json
+[2025-11-15 21:00:10,485] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:00:10,558] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:00:20,660] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:00:20,700] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f0a84380_result.json
+[2025-11-15 21:00:20,714] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:00:20,783] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:00:30,905] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:00:30,945] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b28618b9_result.json
+[2025-11-15 21:00:30,958] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:00:31,029] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:00:41,107] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:00:41,141] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_aff3e4d4_result.json
+[2025-11-15 21:00:41,154] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:00:41,221] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:00:51,310] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:00:51,347] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_ea3a4809_result.json
+[2025-11-15 21:00:51,360] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:00:51,430] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:01:01,540] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:01:01,578] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_01aa6017_result.json
+[2025-11-15 21:01:01,595] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:01:01,670] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:01:11,780] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:01:11,819] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_75b0b44f_result.json
+[2025-11-15 21:01:11,831] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:01:11,906] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:01:22,011] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:01:22,049] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_6c9003ac_result.json
+[2025-11-15 21:01:22,063] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:01:22,134] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:01:32,242] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:01:32,278] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_d9352cb2_result.json
+[2025-11-15 21:01:32,291] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:01:32,364] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:01:42,474] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:01:42,509] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a578e633_result.json
+[2025-11-15 21:01:42,522] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:01:42,590] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:01:52,692] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:01:52,759] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_f52fcae2_result.json
+[2025-11-15 21:01:52,773] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:01:52,840] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:02:02,937] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:02:02,973] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_5c9faeee_result.json
+[2025-11-15 21:02:02,988] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:02:03,107] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:02:13,207] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:02:13,235] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_02ab8319_result.json
+[2025-11-15 21:02:13,249] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:02:13,314] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:02:23,430] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:02:23,464] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_b73f8e1d_result.json
+[2025-11-15 21:02:23,476] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:02:23,540] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:02:33,617] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:02:33,660] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_e2b66899_result.json
+[2025-11-15 21:02:33,671] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:02:33,731] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:02:43,829] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:02:43,860] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_a5cabad1_result.json
+[2025-11-15 21:02:43,872] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:02:43,938] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:02:54,037] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:02:54,071] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_3534e96e_result.json
+[2025-11-15 21:02:54,084] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:02:54,162] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.
+[2025-11-15 21:03:04,355] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 21:03:04,383] [WARNING] [auvap.rl.remote_executor] - Result file not found on VM: /tmp/auvap_rl/exploit_VULN-001_96771262_result.json
+[2025-11-15 21:03:04,394] [DEBUG] [auvap.rl.script_env] - Executed script on remote VM
+[2025-11-15 21:03:04,468] [WARNING] [auvap.rl.remote_executor] - SSH session issue detected ([Errno 2] No such file). Reconnecting and retrying once.

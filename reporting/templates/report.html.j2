@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AUVAP Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    h1, h2 { color: #333; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+    th { background: #f5f5f5; }
+  </style>
+</head>
+<body>
+  <h1>AUVAP Executive Summary</h1>
+  <p>Scan timestamp: {{ summary.scan_timestamp }}</p>
+  <ul>
+    <li>Total findings: {{ summary.total_findings }}</li>
+    <li>Remote exploitable: {{ summary.remote_exploitable }}</li>
+    <li>Scripts generated: {{ summary.scripts_generated }}</li>
+    <li>Scripts executed: {{ summary.scripts_executed }}</li>
+    <li>Successful exploits: {{ summary.successful_exploits }}</li>
+    <li>Failed exploits: {{ summary.failed_exploits }}</li>
+  </ul>
+
+  <h2>Severity Breakdown</h2>
+  <table>
+    <tr><th>Severity</th><th>Count</th></tr>
+    {% for severity, count in statistics.severity_breakdown.items() %}
+    <tr><td>{{ severity }}</td><td>{{ count }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <h2>Execution Results</h2>
+  <table>
+    <tr><th>Vulnerability</th><th>Status</th><th>Evidence / Error</th></tr>
+    {% for result in details.execution_results %}
+    <tr>
+      <td>{{ result.vuln_id }}</td>
+      <td>{{ 'Success' if result.success else 'Failure' }}</td>
+      <td>{{ result.evidence or result.error_message }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>RAG Memory Statistics</h2>
+  <ul>
+    {% for key, value in statistics.rag_memory.items() %}
+      <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

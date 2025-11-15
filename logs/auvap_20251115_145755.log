@@ -1,0 +1,9 @@
+[2025-11-15 21:57:55,146] [DEBUG] [auvap] - Logging initialized -> logs/auvap_20251115_145755.log
+[2025-11-15 21:57:55,146] [INFO] [auvap] - Starting AUVAP pipeline | RL mode: train
+[2025-11-15 21:57:55,146] [WARNING] [auvap.rag.memory] - Vector RAG backend unavailable, falling back to JSON store: chromadb is required unless a custom client is provided to RAGMemorySystem
+[2025-11-15 21:57:55,146] [WARNING] [auvap.rag.memory] - Using SimpleJSONMemorySystem fallback (vector embeddings unavailable).
+[2025-11-15 21:57:55,163] [INFO] [auvap] - Parsed 115 findings from Nessus file
+[2025-11-15 21:57:55,164] [INFO] [auvap] - Loaded context rules for AUVAP Labs
+[2025-11-15 21:57:55,164] [DEBUG] [auvap.llm.classifier] - Classification prompt token estimate=9925
+[2025-11-15 21:57:55,164] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.5-pro
+[2025-11-15 21:58:04,145] [WARNING] [auvap.llm.gemini] - Gemini temporary error 503 (attempt 1/3)

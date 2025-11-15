@@ -1,0 +1,62 @@
+{
+  "company_name": "AUVAP Labs",
+  "environment": "Testing",
+  "server_purpose": "Isolated lab infrastructure for validation",
+  "exploitation_constraints": {
+    "access_type": "remote_only",
+    "description": "The autonomous agent may only interact with systems over the network.",
+    "agent_capabilities": [
+      "Network scanning",
+      "Remote service interaction",
+      "Protocol fuzzing",
+      "Credential spraying"
+    ],
+    "agent_limitations": [
+      "No local shell access",
+      "No physical access",
+      "No credential reuse outside scope"
+    ]
+  },
+  "ignore_rules": [
+    {
+      "type": "port",
+      "value": "25",
+      "operator": "equals",
+      "reason": "Mail services are handled by a third party"
+    },
+    {
+      "type": "cvss_threshold",
+      "value": "4.0",
+      "operator": "less_than",
+      "reason": "Low severity findings are deferred"
+    }
+  ],
+  "priority_rules": [
+    {
+      "type": "service",
+      "value": "ssh",
+      "priority": "critical",
+      "reason": "SSH access protects management interfaces"
+    },
+    {
+      "type": "cvss_range",
+      "value": "8.0-10.0",
+      "priority": "high",
+      "reason": "High CVSS indicates critical risk"
+    }
+  ],
+  "force_include": [
+    {
+      "type": "cve",
+      "value": "CVE-2022-1388",
+      "reason": "Tracked internally as priority incident"
+    }
+  ],
+  "safety_constraints": {
+    "max_exploits_per_run": 10,
+    "timeout_per_exploit": 60,
+    "allowed_ip_ranges": ["192.168.56.0/24"],
+    "forbidden_commands": ["rm -rf", "mkfs", "dd if=/dev/zero"],
+    "sandbox_required": true
+  }
+}

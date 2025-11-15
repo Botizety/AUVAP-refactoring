@@ -1,0 +1,49 @@
+[2025-11-15 19:15:53,257] [DEBUG] [auvap] - Logging initialized -> logs/auvap_20251115_121553.log
+[2025-11-15 19:15:53,257] [INFO] [auvap] - Starting AUVAP pipeline | RL mode: train
+[2025-11-15 19:15:53,257] [WARNING] [auvap.rag.memory] - Vector RAG backend unavailable, falling back to JSON store: chromadb is required unless a custom client is provided to RAGMemorySystem
+[2025-11-15 19:15:53,257] [WARNING] [auvap.rag.memory] - Using SimpleJSONMemorySystem fallback (vector embeddings unavailable).
+[2025-11-15 19:15:53,273] [INFO] [auvap] - Parsed 115 findings from Nessus file
+[2025-11-15 19:15:53,274] [INFO] [auvap] - Loaded context rules for AUVAP Labs
+[2025-11-15 19:15:53,274] [DEBUG] [auvap.llm.classifier] - Classification prompt token estimate=9925
+[2025-11-15 19:15:53,274] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:05,288] [DEBUG] [auvap.llm.gemini] - Attempting JSON repair on malformed Gemini response
+[2025-11-15 19:16:05,294] [WARNING] [auvap.llm.classifier] - remote_exploitable_count mismatch: declared=23 actual=5. Auto-correcting.
+[2025-11-15 19:16:05,294] [WARNING] [auvap.llm.classifier] - Count mismatch: filtered=0 remote=5 total=115. Auto-correcting filtered.
+[2025-11-15 19:16:05,294] [INFO] [auvap] - LLM classified 5 remote exploitable findings
+[2025-11-15 19:16:05,296] [INFO] [auvap] - Classification report written to /Users/boat/AUVAP real/auvap/reports/Meta_hvp1r9_run_classification.json
+[2025-11-15 19:16:05,296] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-001 | RAG summary: success=0, failure=0, lessons=0
+[2025-11-15 19:16:05,297] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:12,127] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-002 | RAG summary: success=0, failure=0, lessons=0
+[2025-11-15 19:16:12,128] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:21,133] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-003 | RAG summary: success=0, failure=0, lessons=0
+[2025-11-15 19:16:21,133] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:31,069] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-004 | RAG summary: success=0, failure=0, lessons=0
+[2025-11-15 19:16:31,070] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:38,955] [DEBUG] [auvap.llm.script_generator] - Building script for VULN-005 | RAG summary: success=0, failure=0, lessons=0
+[2025-11-15 19:16:38,955] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:51,705] [DEBUG] [auvap.llm.gemini] - Attempting JSON repair on malformed Gemini response
+[2025-11-15 19:16:51,714] [WARNING] [auvap.llm.script_generator] - LLM script generation attempt 1/3 failed for VULN-005: Script response missing fields: ['execution_notes', 'exploit_type', 'improvements_over_past', 'success_indicators', 'techniques_applied', 'techniques_avoided']
+[2025-11-15 19:16:51,714] [DEBUG] [auvap.llm.gemini] - Dispatching Gemini request | model=models/gemini-2.0-flash
+[2025-11-15 19:16:58,884] [INFO] [auvap] - Generated scripts for 5 vulnerabilities
+[2025-11-15 19:16:58,886] [INFO] [auvap] - Script generation report written to /Users/boat/AUVAP real/auvap/reports/Meta_hvp1r9_run_scripts.json
+[2025-11-15 19:16:58,887] [INFO] [auvap] - Initializing PPO agent for RL mode: train
+[2025-11-15 19:17:03,081] [INFO] [auvap] - Remote VM executor enabled - scripts will run on VM
+[2025-11-15 19:17:13,580] [INFO] [auvap.rl.remote_executor] - Connected to VM msfadmin@192.168.126.128:22
+[2025-11-15 19:17:13,594] [INFO] [auvap] - Training PPO agent on 5 vulnerabilities
+[2025-11-15 19:17:13,597] [INFO] [auvap.rl.rl_feedback] - RAG context | successes=0 failures=0 lessons=0
+[2025-11-15 19:17:13,623] [INFO] [auvap.rl.ppo_agent] - Created PPO model 'ppo_VULN-001' | lr=0.0003 n_steps=2048 batch=64 device=auto
+[2025-11-15 19:17:13,623] [INFO] [auvap.rl.ppo_agent] - Starting PPO training for 50 timesteps
+[2025-11-15 19:17:13,625] [ERROR] [auvap] - RL training failed for VULN-001: You must install tqdm and rich in order to use the progress bar callback. It is included if you install stable-baselines with the extra packages: `pip install stable-baselines3[extra]`
+[2025-11-15 19:17:13,626] [INFO] [auvap.rl.rl_feedback] - RAG context | successes=0 failures=0 lessons=0
+[2025-11-15 19:17:13,626] [INFO] [auvap.rl.ppo_agent] - Starting PPO training for 50 timesteps
+[2025-11-15 19:17:13,626] [ERROR] [auvap] - RL training failed for VULN-002: You must install tqdm and rich in order to use the progress bar callback. It is included if you install stable-baselines with the extra packages: `pip install stable-baselines3[extra]`
+[2025-11-15 19:17:13,627] [INFO] [auvap.rl.rl_feedback] - RAG context | successes=0 failures=0 lessons=0
+[2025-11-15 19:17:13,627] [INFO] [auvap.rl.ppo_agent] - Starting PPO training for 50 timesteps
+[2025-11-15 19:17:13,627] [ERROR] [auvap] - RL training failed for VULN-003: You must install tqdm and rich in order to use the progress bar callback. It is included if you install stable-baselines with the extra packages: `pip install stable-baselines3[extra]`
+[2025-11-15 19:17:13,628] [INFO] [auvap.rl.rl_feedback] - RAG context | successes=0 failures=0 lessons=0
+[2025-11-15 19:17:13,628] [INFO] [auvap.rl.ppo_agent] - Starting PPO training for 50 timesteps
+[2025-11-15 19:17:13,628] [ERROR] [auvap] - RL training failed for VULN-004: You must install tqdm and rich in order to use the progress bar callback. It is included if you install stable-baselines with the extra packages: `pip install stable-baselines3[extra]`
+[2025-11-15 19:17:13,628] [INFO] [auvap.rl.rl_feedback] - RAG context | successes=0 failures=0 lessons=0
+[2025-11-15 19:17:13,628] [INFO] [auvap.rl.ppo_agent] - Starting PPO training for 50 timesteps
+[2025-11-15 19:17:13,629] [ERROR] [auvap] - RL training failed for VULN-005: You must install tqdm and rich in order to use the progress bar callback. It is included if you install stable-baselines with the extra packages: `pip install stable-baselines3[extra]`
+[2025-11-15 19:17:13,665] [INFO] [auvap] - Report written to /Users/boat/AUVAP real/auvap/reports/Meta_hvp1r9_run.json

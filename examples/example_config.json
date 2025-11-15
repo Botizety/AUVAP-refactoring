@@ -1,0 +1,82 @@
+{
+  "company_name": "AUVAP Reference Lab",
+  "environment": "Testing",
+  "server_purpose": "Hypervisor-backed lab for regression testing",
+  "exploitation_constraints": {
+    "access_type": "remote_only",
+    "description": "The autonomous agent is limited to network-based interactions with approved IP ranges.",
+    "agent_capabilities": [
+      "TCP/UDP scanning",
+      "Protocol fuzzing",
+      "Password spraying",
+      "Web exploitation"
+    ],
+    "agent_limitations": [
+      "No physical access",
+      "No local shell execution",
+      "No phishing or social engineering"
+    ]
+  },
+  "ignore_rules": [
+    {
+      "type": "port",
+      "value": "25",
+      "operator": "equals",
+      "reason": "Mail relays are out of scope"
+    },
+    {
+      "type": "cvss_threshold",
+      "value": "4.0",
+      "operator": "less_than",
+      "reason": "Defer informational issues"
+    }
+  ],
+  "priority_rules": [
+    {
+      "type": "service",
+      "value": "ssh",
+      "priority": "critical",
+      "reason": "SSH protects administrative access"
+    },
+    {
+      "type": "cvss_range",
+      "value": "8.0-10.0",
+      "priority": "high",
+      "reason": "High severity requires fastest response"
+    },
+    {
+      "type": "attack_vector",
+      "value": "Network",
+      "priority": "high",
+      "reason": "Remote network-accessible issues are prioritized"
+    }
+  ],
+  "force_include": [
+    {
+      "type": "plugin_id",
+      "value": "200002",
+      "reason": "Track MS17-010 exposure"
+    },
+    {
+      "type": "cve",
+      "value": "CVE-2021-41773",
+      "reason": "Critical HTTPD issue under investigation"
+    }
+  ],
+  "safety_constraints": {
+    "max_exploits_per_run": 10,
+    "timeout_per_exploit": 60,
+    "allowed_ip_ranges": [
+      "192.168.56.0/24",
+      "10.10.10.0/24"
+    ],
+    "forbidden_commands": [
+      "rm -rf",
+      "mkfs",
+      "dd if=/dev/zero",
+      "shutdown",
+      "reboot"
+    ],
+    "sandbox_required": true
+  }
+}

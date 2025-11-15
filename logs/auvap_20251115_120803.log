@@ -1,0 +1,2 @@
+[2025-11-15 19:08:03,699] [DEBUG] [auvap] - Logging initialized -> logs/auvap_20251115_120803.log
+[2025-11-15 19:08:03,699] [INFO] [auvap] - Starting AUVAP pipeline | RL mode: train
