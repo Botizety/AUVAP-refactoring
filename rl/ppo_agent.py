@@ -71,6 +71,8 @@ class PPOScriptAgent:
             verbose=1,
             tensorboard_log=self.tensorboard_log,
             device=self.device,
+            max_grad_norm=0.5,  # Add gradient clipping to prevent NaN
+            clip_range=0.2,  # Standard PPO clipping
         )
         
         logger.info(

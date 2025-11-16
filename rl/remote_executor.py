@@ -130,8 +130,17 @@ class RemoteVMExecutor:
             self._write_remote_file(remote_script_path, wrapper)
             
             # Execute script on VM with timeout
-            command = f"timeout {timeout}s {self.python_path} {remote_script_path}"
+            command = f"timeout {timeout}s {self.python_path} {remote_script_path} 2>&1"
             stdout, stderr, exit_code = self._exec_command(command, timeout=timeout + 5)
+            
+            # Log execution details for debugging
+            if exit_code != 0:
+                logger.warning("Script execution failed on VM | exit_code=%s stdout=%s stderr=%s", 
+                             exit_code, stdout[:200] if stdout else "", stderr[:200] if stderr else "")
+            
+            # Small delay to ensure file is written (disk flush)
+            import time
+            time.sleep(0.5)
             
             # Retrieve execution result JSON
             result = self._read_remote_result(remote_result_path)
@@ -179,26 +188,71 @@ class RemoteVMExecutor:
     ) -> str:
         """Build Python wrapper that executes exploit and saves results as JSON."""
         
-        target_ip = vuln.get("host", "127.0.0.1")
-        target_port = vuln.get("port", 0)
+        # Extract host/port from nested 'finding' dict if present
+        finding = vuln.get("finding", {})
+        target_ip = finding.get("host", vuln.get("host", "127.0.0.1"))
+        target_port = finding.get("port", vuln.get("port", 0))
         
-        wrapper = f'''#!/usr/bin/env python3
+        # Strip type hints and f-strings for Python 3.4 compatibility
+        import re
+        # Remove type hints: (arg: type) -> returntype:
+        exploit_script_compat = re.sub(r'(\w+)\s*:\s*[\w\[\]\.]+(\s*[,\)])', r'\1\2', exploit_script)
+        exploit_script_compat = re.sub(r'\)\s*->\s*[\w\[\]\.]+\s*:', '):', exploit_script_compat)
+        
+        # Remove Python 3.6+ SSL constants not available in Python 3.4
+        # ssl.OP_NO_TLSv1_1, ssl.OP_NO_TLSv1_2, ssl.OP_NO_TLSv1_3, etc.
+        exploit_script_compat = re.sub(r'ssl\.OP_NO_\w+', '0  # Removed incompatible SSL constant', exploit_script_compat)
+        # Remove SSLContext with specific protocol versions not in 3.4
+        exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS_CLIENT', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
+        exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS_SERVER', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
+        exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS\b', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
+        # Remove context.options = lines that try to set SSL options
+        exploit_script_compat = re.sub(r'context\.options\s*[|]?=\s*ssl\.OP_\w+.*', '# Removed incompatible SSL option', exploit_script_compat)
+        
+        # Convert bytes.hex() to binascii.hexlify() for Python 3.4 compatibility
+        # Add import at the top if .hex() is used
+        if '.hex()' in exploit_script_compat:
+            # Add binascii import after other imports
+            exploit_script_compat = 'import binascii\n' + exploit_script_compat
+            # Replace variable.hex() with binascii.hexlify(variable).decode('ascii')
+            exploit_script_compat = re.sub(r'(\w+)\.hex\(\)', r"binascii.hexlify(\1).decode('ascii')", exploit_script_compat)
+        
+        # Convert f-strings to .format() style
+        # f"text {var}" or f"text {var:.2f}" -> "text {}".format(var) or "text {:.2f}".format(var)
+        def convert_fstring(match):
+            content = match.group(1)
+            # Extract variables with optional format specs: {var} or {var:.2f}
+            vars_info = re.findall(r'\{([^:}]+)(?::([^}]+))?\}', content)
+            vars_list = [v[0] for v in vars_info]
+            # Replace {var:spec} with {:spec} or {var} with {}
+            template = re.sub(r'\{[^:}]+(:([^}]+))?\}', lambda m: '{' + (m.group(1) or '') + '}', content)
+            if vars_list:
+                return '"{}"'.format(template) + '.format({})'.format(", ".join(vars_list))
+            return '"{}"'.format(template)
+        
+        exploit_script_compat = re.sub(r'f"([^"]*)"', convert_fstring, exploit_script_compat)
+        exploit_script_compat = re.sub(r"f'([^']*)'", lambda m: convert_fstring(type('M', (), {'group': lambda s, x: m.group(x)})()), exploit_script_compat)
+        
+        # Python 3.4 compatible wrapper (no f-strings, compatible exception handling)
+        wrapper = '''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """Remote exploit execution wrapper for AUVAP PPO training."""
 
+from __future__ import print_function
 import json
 import sys
 import time
 import traceback
 
 # Embedded exploit script
-{exploit_script}
+''' + exploit_script_compat + '''
 
 def main():
     """Execute exploit and save results."""
     
-    target_ip = "{target_ip}"
-    target_port = {target_port}
-    result_path = "{result_path}"
+    target_ip = "''' + target_ip + '''"
+    target_port = ''' + str(target_port) + '''
+    result_path = "''' + result_path + '''"
     
     start_time = time.time()
     
@@ -229,14 +283,14 @@ def main():
         
     except Exception as exc:
         execution_time = time.time() - start_time
-        error_result = {{
+        error_result = {
             "success": False,
             "message": "Exploit failed",
             "evidence": None,
             "execution_time": execution_time,
             "error_message": str(exc),
             "traceback": traceback.format_exc(),
-        }}
+        }
         
         # Save error result
         try:
@@ -273,27 +327,31 @@ if __name__ == "__main__":
         self._with_reconnect(_upload)
     
     def _read_remote_result(self, remote_path: str) -> Optional[Dict[str, Any]]:
-        """Read execution result JSON from VM."""
+        """Read execution result JSON from VM using cat command instead of SFTP."""
         
         if not self.ssh_client:
             return None
 
-        def _download() -> Optional[Dict[str, Any]]:
-            if not self.ssh_client:
-                return None
-            sftp = self.ssh_client.open_sftp()
-            try:
-                with sftp.open(remote_path, "r") as f:
-                    content = f.read().decode("utf-8")
-                return json.loads(content)
-            finally:
-                sftp.close()
-
         try:
-            return self._with_reconnect(_download)
-        except FileNotFoundError:
-            logger.warning("Result file not found on VM: %s", remote_path)
-            return None
+            # Use cat command instead of SFTP to avoid file handle issues
+            stdout, stderr, exit_code = self._exec_command(f"cat {remote_path}", timeout=10)
+            
+            if exit_code != 0:
+                logger.warning("Result file not found on VM: %s", remote_path)
+                return None
+            
+            if not stdout:
+                logger.warning("Result file is empty: %s", remote_path)
+                return None
+            
+            # Parse JSON from stdout
+            try:
+                return json.loads(stdout)
+            except json.JSONDecodeError as exc:
+                logger.warning("Failed to parse result JSON from %s: %s", remote_path, exc)
+                logger.debug("Raw stdout: %s", stdout[:500])
+                return None
+                
         except Exception as exc:  # noqa: BLE001
             logger.warning("Failed to read result from VM: %s", exc)
             return None

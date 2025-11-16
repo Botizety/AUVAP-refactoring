@@ -46,7 +46,7 @@ class ExploitScriptEnv(gym.Env):
         self.current_script = initial_script
         self.modification_count = 0
         self.execution_history: List[Dict[str, Any]] = []
-        self.best_reward = -float("inf")
+        self.best_reward = 0.0  # Changed from -inf to prevent NaN issues
         
         # --- Action space: discrete modifications ---
         # 0: increase timeout, 1: decrease timeout, 2: toggle SSL verify,
@@ -65,10 +65,13 @@ class ExploitScriptEnv(gym.Env):
         
     def reset(self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None) -> Tuple[np.ndarray, Dict[str, Any]]:
         super().reset(seed=seed)
+        
+        # Reset episode state but PRESERVE execution_history to track all attempts across episodes
         self.current_script = self.initial_script
         self.modification_count = 0
-        self.execution_history = []
-        self.best_reward = -float("inf")
+        # DO NOT clear execution_history - we want to track all attempts across all episodes
+        # self.execution_history = []  # Commented out to preserve history
+        self.best_reward = 0.0  # Changed from -inf to prevent NaN issues
         obs = self._get_observation(last_result=None)
         info = {"vuln_id": self.vuln.get("vuln_id"), "reset": True}
         return obs, info
@@ -158,13 +161,14 @@ class ExploitScriptEnv(gym.Env):
     
     def _compute_reward(self, result: Dict[str, Any], modification: str) -> float:
         """
-        Reward structure:
+        Reward structure (with clipping to prevent NaN):
         - Success: +100
         - Partial evidence: +30
         - Faster execution (if successful): bonus
-        - Failure: -10
-        - Repeated same error: -20
-        - Timeout/crash: -15
+        - Failure: -5 (reduced from -10)
+        - Repeated same error: -10 (reduced from -20)
+        - Timeout/crash: -8 (reduced from -15)
+        - Exploration bonus: +1 (to encourage trying modifications)
         """
         
         if result.get("success"):
@@ -175,26 +179,28 @@ class ExploitScriptEnv(gym.Env):
                 base_reward += 20.0
             elif exec_time < 15.0:
                 base_reward += 10.0
-            return base_reward
+            # Clip to prevent extreme values
+            return np.clip(base_reward, -50.0, 150.0)
         
         # Partial credit for evidence collection
         evidence = result.get("evidence") or ""
         if evidence and len(evidence) > 50:
-            return 30.0
+            return np.clip(30.0, -50.0, 150.0)
         
-        # Penalize repeated errors
+        # Penalize repeated errors (reduced penalty)
         error_msg = result.get("error_message") or ""
         if error_msg and self.execution_history:
             prev_errors = [h.get("error_message", "") for h in self.execution_history[:-1]]
             if error_msg in prev_errors:
-                return -20.0
+                # Small exploration bonus even for repeated failures
+                return np.clip(-10.0 + 1.0, -50.0, 150.0)
         
-        # Timeout/crash penalty
+        # Timeout/crash penalty (reduced)
         if "timed out" in error_msg.lower() or "timeout" in error_msg.lower():
-            return -15.0
+            return np.clip(-8.0 + 1.0, -50.0, 150.0)
         
-        # Generic failure
-        return -10.0
+        # Generic failure (reduced penalty + exploration bonus)
+        return np.clip(-5.0 + 1.0, -50.0, 150.0)
     
     def _get_observation(self, last_result: Optional[Dict[str, Any]]) -> np.ndarray:
         """Extract features from current script and last execution result."""
@@ -259,37 +265,9 @@ class ExploitScriptEnv(gym.Env):
     
     def _add_retry_logic(self, script: str) -> str:
         """Wrap main exploit logic in a retry loop."""
-        if "for retry_attempt in range" in script:
-            return script  # Already has retry
-        
-        # Find the exploit function body and wrap it
-        lines = script.splitlines()
-        new_lines = []
-        in_exploit = False
-        indent_level = 0
-        
-        for line in lines:
-            if line.strip().startswith("def exploit("):
-                in_exploit = True
-                new_lines.append(line)
-                new_lines.append("    for retry_attempt in range(3):  # Agent added retry")
-                new_lines.append("        try:")
-                indent_level = 12  # Base indent after try
-                continue
-            
-            if in_exploit and line.strip() and not line.strip().startswith("#"):
-                # Add extra indent
-                new_lines.append(" " * 4 + line)
-            else:
-                new_lines.append(line)
-                
-            if in_exploit and line.strip().startswith("return "):
-                new_lines.append("        except Exception as e:")
-                new_lines.append("            if retry_attempt == 2:")
-                new_lines.append("                raise")
-                in_exploit = False
-        
-        return "\n".join(new_lines)
+        # DISABLED: Causes indentation errors in Python 3.4
+        # The modification breaks Python 3.4 syntax
+        return script
     
     def _change_payload_encoding(self, script: str) -> str:
         """Switch between URL encoding, base64, or plain text payloads."""
@@ -318,8 +296,8 @@ class ExploitScriptEnv(gym.Env):
     
     def _modify_connection_params(self, script: str) -> str:
         """Adjust socket or connection settings."""
-        if "socket.SOCK_STREAM" in script and "socket.SO_REUSEADDR" not in script:
-            return script.replace("socket.SOCK_STREAM)", "socket.SOCK_STREAM)\n    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)")
+        # DISABLED: Causes syntax errors (inserts code after closing paren)
+        # The modification breaks Python 3.4 syntax
         return script
     
     # --- Feature extraction ---
