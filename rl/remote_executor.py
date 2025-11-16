@@ -208,6 +208,16 @@ class RemoteVMExecutor:
         exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS\b', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
         # Remove context.options = lines that try to set SSL options
         exploit_script_compat = re.sub(r'context\.options\s*[|]?=\s*ssl\.OP_\w+.*', '# Removed incompatible SSL option', exploit_script_compat)
+
+        # Harden STARTTLS check: accept leading whitespace/newlines before status code
+        exploit_script_compat = exploit_script_compat.replace(
+            'starttls_response.startswith("220")',
+            'starttls_response.lstrip().startswith("220")'
+        )
+        exploit_script_compat = exploit_script_compat.replace(
+            "starttls_response.startswith('220')",
+            "starttls_response.lstrip().startswith('220')"
+        )
         
         # Convert bytes.hex() to binascii.hexlify() for Python 3.4 compatibility
         # Add import at the top if .hex() is used
