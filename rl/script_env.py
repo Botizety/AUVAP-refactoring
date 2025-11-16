@@ -54,14 +54,19 @@ class ExploitScriptEnv(gym.Env):
         # 6: modify connection parameters, 7: done (terminate episode)
         self.action_space = spaces.Discrete(8)
         
-        # --- Observation space: script features + execution feedback ---
+        # --- Observation space: script features + execution feedback + error tracking ---
         # [timeout_val, ssl_verify(0/1), retry_count, payload_length, has_error_handling,
-        #  last_success(0/1), last_execution_time, modification_count, target_port]
+        #  last_success(0/1), last_execution_time, modification_count, target_port,
+        #  syntax_error, attribute_error, ssl_error, timeout_error, script_lines, consecutive_failures]
         self.observation_space = spaces.Box(
-            low=np.array([0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=np.float32),
-            high=np.array([300, 1, 10, 10000, 1, 1, 300, self.max_modifications, 65535], dtype=np.float32),
+            low=np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], dtype=np.float32),
+            high=np.array([300, 1, 10, 10000, 1, 1, 300, self.max_modifications, 65535,
+                          1, 1, 1, 1, 1000, 50], dtype=np.float32),
             dtype=np.float32,
         )
+
+        # Track consecutive failures for better learning
+        self.consecutive_failures = 0
         
     def reset(self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None) -> Tuple[np.ndarray, Dict[str, Any]]:
         super().reset(seed=seed)
@@ -69,8 +74,10 @@ class ExploitScriptEnv(gym.Env):
         # Reset episode state but PRESERVE execution_history to track all attempts across episodes
         self.current_script = self.initial_script
         self.modification_count = 0
-        # DO NOT clear execution_history - we want to track all attempts across all episodes
-        # self.execution_history = []  # Commented out to preserve history
+        self.consecutive_failures = 0
+        # Keep last 50 results to prevent memory leak
+        if len(self.execution_history) > 50:
+            self.execution_history = self.execution_history[-50:]
         self.best_reward = 0.0  # Changed from -inf to prevent NaN issues
         obs = self._get_observation(last_result=None)
         info = {"vuln_id": self.vuln.get("vuln_id"), "reset": True}
@@ -118,19 +125,29 @@ class ExploitScriptEnv(gym.Env):
         # Compute reward
         reward = self._compute_reward(result, modification_applied)
         self.best_reward = max(self.best_reward, reward)
-        
+
+        # Track consecutive failures and terminate on success
+        if result.get("success"):
+            terminated = True
+            self.consecutive_failures = 0
+            logger.info("Script succeeded! Terminating episode early.")
+        else:
+            self.consecutive_failures += 1
+
         # Build observation
         obs = self._get_observation(last_result=result)
-        
+
         info = {
             "action": action,
             "modification_applied": modification_applied,
             "success": result.get("success"),
             "execution_time": result.get("execution_time"),
             "error_message": result.get("error_message"),
+            "error_type": result.get("error_type"),
             "best_reward": self.best_reward,
+            "consecutive_failures": self.consecutive_failures,
         }
-        
+
         return obs, reward, terminated, truncated, info
     
     def _apply_action(self, action: int) -> str:
@@ -161,16 +178,25 @@ class ExploitScriptEnv(gym.Env):
     
     def _compute_reward(self, result: Dict[str, Any], modification: str) -> float:
         """
-        Reward structure (with clipping to prevent NaN):
+        Reward structure with DETAILED SHAPING for partial progress:
         - Success: +100
-        - Partial evidence: +30
-        - Faster execution (if successful): bonus
-        - Failure: -5 (reduced from -10)
-        - Repeated same error: -10 (reduced from -20)
-        - Timeout/crash: -8 (reduced from -15)
-        - Exploration bonus: +1 (to encourage trying modifications)
+        - Script compiled (no SyntaxError): +10
+        - Connected to target (evidence of banner): +15
+        - Protocol negotiated (STARTTLS/EHLO): +25
+        - Evidence collected (>50 chars): +30
+        - Fast execution bonus: +10-20
+        - Syntax/compilation error: -15
+        - Repeated error: -12
+        - Timeout: -8
+        - New error type (exploration): +2
         """
-        
+
+        error_msg = result.get("error_message") or ""
+        error_type = result.get("error_type") or ""
+        evidence = result.get("evidence") or ""
+        traceback_str = result.get("traceback") or ""
+
+        # FULL SUCCESS
         if result.get("success"):
             base_reward = 100.0
             # Bonus for fast exploits
@@ -179,46 +205,91 @@ class ExploitScriptEnv(gym.Env):
                 base_reward += 20.0
             elif exec_time < 15.0:
                 base_reward += 10.0
-            # Clip to prevent extreme values
             return np.clip(base_reward, -50.0, 150.0)
-        
-        # Partial credit for evidence collection
-        evidence = result.get("evidence") or ""
+
+        # PARTIAL SUCCESS - Reward shaping for progress
+        partial_reward = 0.0
+
+        # Check if script compiled (no SyntaxError/NameError/AttributeError in traceback)
+        compilation_errors = ["SyntaxError", "NameError", "IndentationError"]
+        if not any(err in traceback_str for err in compilation_errors):
+            partial_reward += 10.0  # Script at least compiled and started running
+
+        # Check for connection progress (banner received)
+        if "Banner:" in evidence or "220" in evidence or "SMTP" in evidence:
+            partial_reward += 15.0  # Connected to target
+
+        # Check for protocol negotiation (STARTTLS, EHLO, etc.)
+        protocol_indicators = ["STARTTLS", "EHLO", "HELO", "250", "TLS"]
+        if any(indicator in evidence for indicator in protocol_indicators):
+            partial_reward += 25.0  # Successfully negotiated protocol
+
+        # Check for substantial evidence collected
         if evidence and len(evidence) > 50:
-            return np.clip(30.0, -50.0, 150.0)
-        
-        # Penalize repeated errors (reduced penalty)
-        error_msg = result.get("error_message") or ""
+            partial_reward += 30.0  # Collected meaningful evidence
+
+        # If we got any partial progress, return positive reward
+        if partial_reward > 0:
+            return np.clip(partial_reward, -50.0, 150.0)
+
+        # FAILURES - Penalize based on error type
+
+        # Severe: Syntax/compilation errors (script fundamentally broken)
+        if error_type in compilation_errors or any(err in error_msg for err in compilation_errors):
+            # Check if this is a NEW error type (exploration bonus)
+            if self.execution_history:
+                prev_error_types = [h.get("error_type") for h in self.execution_history[:-1]]
+                if error_type not in prev_error_types:
+                    return np.clip(-13.0, -50.0, 150.0)  # New error type, slight bonus
+            return np.clip(-15.0, -50.0, 150.0)
+
+        # Repeated same error (not learning)
         if error_msg and self.execution_history:
             prev_errors = [h.get("error_message", "") for h in self.execution_history[:-1]]
             if error_msg in prev_errors:
-                # Small exploration bonus even for repeated failures
-                return np.clip(-10.0 + 1.0, -50.0, 150.0)
-        
-        # Timeout/crash penalty (reduced)
+                return np.clip(-12.0, -50.0, 150.0)
+
+        # Timeout errors (could be progress, just slow)
         if "timed out" in error_msg.lower() or "timeout" in error_msg.lower():
-            return np.clip(-8.0 + 1.0, -50.0, 150.0)
-        
-        # Generic failure (reduced penalty + exploration bonus)
-        return np.clip(-5.0 + 1.0, -50.0, 150.0)
+            return np.clip(-8.0, -50.0, 150.0)
+
+        # Generic runtime failure (better than compilation failure)
+        # Give small exploration bonus for trying
+        return np.clip(-6.0 + 2.0, -50.0, 150.0)
     
     def _get_observation(self, last_result: Optional[Dict[str, Any]]) -> np.ndarray:
-        """Extract features from current script and last execution result."""
-        
+        """Extract features from current script and last execution result + error tracking."""
+
         timeout_val = self._extract_timeout(self.current_script)
         ssl_verify = 1.0 if self._has_ssl_verify(self.current_script) else 0.0
         retry_count = self._count_retries(self.current_script)
         payload_length = self._estimate_payload_size(self.current_script)
         has_error_handling = 1.0 if "try:" in self.current_script else 0.0
-        
+
         last_success = 0.0
         last_exec_time = 0.0
+        syntax_error = 0.0
+        attribute_error = 0.0
+        ssl_error = 0.0
+        timeout_error = 0.0
+
         if last_result:
             last_success = 1.0 if last_result.get("success") else 0.0
             last_exec_time = last_result.get("execution_time", 0.0)
-        
+
+            # Error type indicators
+            error_msg = last_result.get("error_message") or ""
+            error_type = last_result.get("error_type") or ""
+
+            syntax_error = 1.0 if "SyntaxError" in error_msg or error_type == "SyntaxError" else 0.0
+            attribute_error = 1.0 if "AttributeError" in error_msg or error_type == "AttributeError" else 0.0
+            ssl_error = 1.0 if "SSLError" in error_msg or "SSL" in error_msg else 0.0
+            timeout_error = 1.0 if "timeout" in error_msg.lower() else 0.0
+
         target_port = float(self.vuln.get("port", 0))
-        
+        script_lines = float(len(self.current_script.split('\n')))
+        consecutive_fails = float(min(self.consecutive_failures, 50))
+
         obs = np.array(
             [
                 timeout_val,
@@ -230,6 +301,12 @@ class ExploitScriptEnv(gym.Env):
                 last_exec_time,
                 self.modification_count,
                 target_port,
+                syntax_error,
+                attribute_error,
+                ssl_error,
+                timeout_error,
+                script_lines,
+                consecutive_fails,
             ],
             dtype=np.float32,
         )

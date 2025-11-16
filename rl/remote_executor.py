@@ -200,14 +200,22 @@ class RemoteVMExecutor:
         exploit_script_compat = re.sub(r'\)\s*->\s*[\w\[\]\.]+\s*:', '):', exploit_script_compat)
         
         # Remove Python 3.6+ SSL constants not available in Python 3.4
-        # ssl.OP_NO_TLSv1_1, ssl.OP_NO_TLSv1_2, ssl.OP_NO_TLSv1_3, etc.
-        exploit_script_compat = re.sub(r'ssl\.OP_NO_\w+', '0  # Removed incompatible SSL constant', exploit_script_compat)
+        # Instead of replacing with 0, remove the entire options line to avoid syntax errors
+        exploit_script_compat = re.sub(
+            r'context\.options\s*[|]?=.*ssl\.OP_.*\n',
+            '# Removed incompatible SSL options for Python 3.4 compatibility\n',
+            exploit_script_compat
+        )
+        # Also handle single-line options assignments
+        exploit_script_compat = re.sub(
+            r'context\.options\s*[|]?=.*ssl\.OP_[^\n]*',
+            '# Removed incompatible SSL options',
+            exploit_script_compat
+        )
         # Remove SSLContext with specific protocol versions not in 3.4
         exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS_CLIENT', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
         exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS_SERVER', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
         exploit_script_compat = re.sub(r'ssl\.PROTOCOL_TLS\b', 'ssl.PROTOCOL_SSLv23', exploit_script_compat)
-        # Remove context.options = lines that try to set SSL options
-        exploit_script_compat = re.sub(r'context\.options\s*[|]?=\s*ssl\.OP_\w+.*', '# Removed incompatible SSL option', exploit_script_compat)
 
         # Harden STARTTLS check: accept leading whitespace/newlines before status code
         exploit_script_compat = exploit_script_compat.replace(
@@ -281,14 +289,17 @@ def main():
         result["execution_time"] = execution_time
         result["target_ip"] = target_ip
         result["target_port"] = target_port
-        
-        # Save result JSON
+
+        # Save result JSON with fsync to ensure it's written to disk
         with open(result_path, "w") as f:
             json.dump(result, f)
-        
+            f.flush()
+            import os
+            os.fsync(f.fileno())
+
         # Print for debugging
         print(json.dumps(result, indent=2))
-        
+
         sys.exit(0 if result.get("success") else 1)
         
     except Exception as exc:
@@ -300,15 +311,26 @@ def main():
             "execution_time": execution_time,
             "error_message": str(exc),
             "traceback": traceback.format_exc(),
+            "error_type": type(exc).__name__,
         }
-        
-        # Save error result
+
+        # Save error result with fsync - CRITICAL for PPO to receive feedback
         try:
             with open(result_path, "w") as f:
                 json.dump(error_result, f)
-        except:
-            pass
-        
+                f.flush()
+                import os
+                os.fsync(f.fileno())
+        except Exception as write_exc:
+            # Last resort: print to stderr with both errors
+            fallback = {
+                "success": False,
+                "error_message": "Failed to write result file: " + str(write_exc),
+                "original_error": str(exc),
+                "traceback": traceback.format_exc()
+            }
+            print(json.dumps(fallback, indent=2), file=sys.stderr)
+
         print(json.dumps(error_result, indent=2), file=sys.stderr)
         sys.exit(1)
 

@@ -29,12 +29,12 @@ class PPOScriptAgent:
         self,
         checkpoint_dir: str = "./rl/checkpoints",
         tensorboard_log: str = "./rl/tensorboard",
-        learning_rate: float = 3e-4,
-        n_steps: int = 2048,
-        batch_size: int = 64,
+        learning_rate: float = 1e-4,  # Lower for sparse reward tasks
+        n_steps: int = 128,  # Match typical episode length (10-50 steps)
+        batch_size: int = 32,  # Smaller for more frequent updates
         n_epochs: int = 10,
         gamma: float = 0.99,
-        ent_coef: float = 0.01,
+        ent_coef: float = 0.05,  # Higher for more exploration
         device: str = "auto",
     ):
         self.checkpoint_dir = Path(checkpoint_dir)
@@ -217,7 +217,14 @@ class TrainingProgressCallback(BaseCallback):
         
     def _on_step(self) -> bool:
         """Called at each environment step."""
-        
+
+        # Log instant rewards from this step
+        if hasattr(self, 'locals') and 'rewards' in self.locals:
+            rewards = self.locals['rewards']
+            for i, reward in enumerate(rewards):
+                if reward != 0:  # Only log non-zero rewards
+                    logger.debug("Step %s env_%s | instant_reward=%.2f", self.n_calls, i, reward)
+
         if self.n_calls % self.log_freq == 0:
             # Log current stats
             if len(self.episode_rewards) > 0:
@@ -230,7 +237,17 @@ class TrainingProgressCallback(BaseCallback):
                     mean_reward,
                     mean_length,
                 )
-        
+            else:
+                # Log even if no episodes completed yet
+                if hasattr(self, 'locals') and 'rewards' in self.locals:
+                    recent_rewards = self.locals.get('rewards', [])
+                    if len(recent_rewards) > 0:
+                        logger.info(
+                            "Step %s | recent_reward=%.2f (no episodes completed yet)",
+                            self.n_calls,
+                            np.mean(recent_rewards),
+                        )
+
         return True
     
     def _on_rollout_end(self) -> None:
